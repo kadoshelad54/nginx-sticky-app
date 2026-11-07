@@ -1,18 +1,18 @@
 from flask import Flask, make_response, request
 import socket
 import pymysql
-import os                                               # NEW
+import os
 
 app = Flask(__name__)
 
 
 def get_connection():
     return pymysql.connect(
-        host=os.environ.get("DB_HOST", "127.0.0.1"),    # CHANGED
+        host=os.environ.get("DB_HOST", "127.0.0.1"),
         port=3306,
-        user=os.environ.get("DB_USER", "root"),         # CHANGED
-        password=os.environ.get("DB_PASSWORD", "secret"),  # CHANGED
-        database=os.environ.get("DB_NAME", "practice"),    # CHANGED
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ.get("DB_PASSWORD", "secret"),
+        database=os.environ.get("DB_NAME", "practice"),
     )
 
 
@@ -47,4 +47,4 @@ def showcount():
     return str(row[0])
 
 
-app.run(port=5000)
+app.run(host="0.0.0.0", port=5000)    # CHANGED
